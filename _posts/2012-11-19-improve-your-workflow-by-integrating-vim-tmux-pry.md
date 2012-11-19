@@ -62,6 +62,51 @@ Let me share my workflow with you.
 [download mp4](http://velvetpulse.s3.amazonaws.com/screencasts/irb-config.mp4) (09:13 / 720p / 26Mb)
 </div>
 
+Want it?
+--------
+
+### 1. Install irb-config
+
+    git clone git://github.com/nviennot/irb-config.git ~/.irb
+    cd ~/.irb
+    make install
+
+You don't need to change any of your projects.
+[irb-config](https://github.com/nviennot/irb-config) is pervasive:  
+When the `.irbrc` file is loaded, irb-config adds the global gemset to Bundler,
+and loads Pry.
+
+### 2. Setup some vim bindings
+
+a. You can use my [vim-config](https://github.com/nviennot/vim-config):
+
+    git clone git://github.com/nviennot/vim-config.git ~/.vim
+    cd ~/.vim
+    make install
+
+b. Or install the [screen](https://github.com/ervandew/screen) plugin and add
+these bindings to your config:
+
+<div class="small">
+{% highlight vim %}
+map <F5> :ScreenShellVertical<CR>
+command -nargs=? -complete=shellcmd W  :w | :call ScreenShellSend("load '".@%."';")
+map <Leader>r :w<CR> :call ScreenShellSend("rspec ".@% . ':' . line('.'))<CR>
+map <Leader>e :w<CR> :call ScreenShellSend("cucumber --format=pretty ".@% . ':' . line('.'))<CR>
+map <Leader>b :w<CR> :call ScreenShellSend("break ".@% . ':' . line('.'))<CR>
+{% endhighlight %}
+</div>
+
+### 3. Setup a proper tmux config (optional)
+
+    git clone git://github.com/nviennot/tmux-config.git ~/.tmux
+    cd ~/.tmux
+    make install
+
+If you are using OSX you will have to fiddle your Terminal settings to enable the Alt key.  
+If you are using Linux, you are good to go.  
+If you are using Windows, you deserve better.
+
 Notes
 -----
 
@@ -75,37 +120,10 @@ If you application has some gems that do not like to have their environment
 switched, start the console with `rails c test`. But be careful, you will
 have to use `:W` to reload the files you are changing.
 
-### Vim bindings
-
-You can use my [vim-config](https://github.com/nviennot/vim-config), or
-install the [screen](https://github.com/ervandew/screen) plugin and these bindings:
-
-
-<div class="small">
-{% highlight vim %}
-map <F5> :ScreenShellVertical<CR>
-command -nargs=? -complete=shellcmd W  :w | :call ScreenShellSend("load '".@%."';")
-map <Leader>r :w<CR> :call ScreenShellSend("rspec ".@% . ':' . line('.'))<CR>
-map <Leader>e :w<CR> :call ScreenShellSend("cucumber --format=pretty ".@% . ':' . line('.'))<CR>
-map <Leader>b :w<CR> :call ScreenShellSend("break ".@% . ':' . line('.'))<CR>
-{% endhighlight %}
-</div>
-
-Want it?
---------
-
-    git clone git://github.com/nviennot/irb-config.git ~/.irb
-    cd ~/.irb
-    make install
-
-You don't need to change any of your projects. irb-config is pervasive.
-When the `.irbrc` file is loaded, irb-config adds the global gemset to Bundler,
-and loads pry.
-
-Config files used
------------------
+Config files references
+-----------------------
 
 * [https://github.com/nviennot/irb-config](https://github.com/nviennot/irb-config)
-* [https://github.com/nviennot/tmux-config](https://github.com/nviennot/tmux-config)
 * [https://github.com/nviennot/vim-config](https://github.com/nviennot/vim-config)
+* [https://github.com/nviennot/tmux-config](https://github.com/nviennot/tmux-config)
 * [https://github.com/nviennot/zsh-config](https://github.com/nviennot/zsh-config)
