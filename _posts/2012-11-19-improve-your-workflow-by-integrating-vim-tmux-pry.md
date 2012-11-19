@@ -62,6 +62,35 @@ Let me share my workflow with you.
 [download mp4](http://velvetpulse.s3.amazonaws.com/screencasts/irb-config.mp4) (09:13 / 720p / 26Mb)
 </div>
 
+Notes
+-----
+
+### Starting in the dev environment
+
+When doing testing in the console with irb-config, always run `rails c`
+and let irb-config switch between your development environment and test
+environment. This will allow painless reloading.
+
+If you application has some gems that do not like to have their environment
+switched, start the console with `rails c test`. But be careful, you will
+have to use `:W` to reload the files you are changing.
+
+### Vim bindings
+
+You can use my [vim-config](https://github.com/nviennot/vim-config), or
+install the [screen](https://github.com/ervandew/screen) plugin and these bindings:
+
+
+<div class="small">
+{% highlight vim %}
+map <F5> :ScreenShellVertical<CR>
+command -nargs=? -complete=shellcmd W  :w | :call ScreenShellSend("load '".@%."';")
+map <Leader>r :w<CR> :call ScreenShellSend("rspec ".@% . ':' . line('.'))<CR>
+map <Leader>e :w<CR> :call ScreenShellSend("cucumber --format=pretty ".@% . ':' . line('.'))<CR>
+map <Leader>b :w<CR> :call ScreenShellSend("break ".@% . ':' . line('.'))<CR>
+{% endhighlight %}
+</div>
+
 Want it?
 --------
 
@@ -70,6 +99,8 @@ Want it?
     make install
 
 You don't need to change any of your projects. irb-config is pervasive.
+When the `.irbrc` file is loaded, irb-config adds the global gemset to Bundler,
+and loads pry.
 
 Config files used
 -----------------
