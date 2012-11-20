@@ -2,7 +2,7 @@
 layout: page
 ---
 
-My name is Nicolas Viennot. I live in NYC in the Upper West Side.  
+My name is Nicolas Viennot. I live in the Upper West Side of NYC.  
 I am a PhD candidate at [Columbia](http://www.cs.columbia.edu/).  
 I do backend development at [Crowdtap](http://crowdtap.com).
 
