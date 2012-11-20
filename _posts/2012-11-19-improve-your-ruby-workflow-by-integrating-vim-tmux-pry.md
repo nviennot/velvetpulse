@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Improve Your Workflow by integrating vim/tmux/pry"
+title: "Improve Your Ruby Workflow by Integrating vim/tmux/pry"
 description: ""
 category: 
 tags: []
