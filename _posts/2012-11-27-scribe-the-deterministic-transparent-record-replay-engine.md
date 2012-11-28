@@ -78,12 +78,12 @@ Try it
 -------
 
 You can download an Ubuntu 12.04 VM loaded with vanilla Scribe
-[here](http://velvetpulse.s3.amazonaws.com/vm/scribe-ubuntu-1204.tar.bz2). **FIXME** upload it.  
+[here](http://velvetpulse.s3.amazonaws.com/vm/scribe-ubuntu-1204.tar.bz2) (1.1Gb).  
 You need [VMware Workstation](http://www.vmware.com/products/workstation/overview.html) or
-[VMware Player](http://www.vmware.com/products/player/overview.html) (free).  
+[VMware Player](http://www.vmware.com/products/player/overview.html) (free) to use it.  
 Login with root/root.
 
-You will need to update Scribe once in the VM because it's a bit out of date.
+You will need to update Scribe you are in because it's a bit out of date.
 
 Scribe is a Framework
 ---------------------
