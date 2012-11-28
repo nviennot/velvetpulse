@@ -85,6 +85,22 @@ Login with root/root.
 
 You will need to update Scribe once in the VM because it's a bit out of date.
 
+Scribe is a Framework
+---------------------
+
+In the video, I spend some time showing what we call *mutable replay*. It's a
+new concept that we've introduced and formalized. I will be presenting our
+research next March at the ASPLOS conference.
+
+The mutable replay engine plugs into the Scribe engine through the Python
+library. The mutable replay sources are not yet distributed.
+
+We have built other projects around the Scribe engine such as Racepro,
+a process race detection engine.
+
+Scribe gives you an API to record/replay applications, and fiddle with their
+state.
+
 Scribe Publications
 -------------------
 
@@ -121,7 +137,7 @@ Acknowledgments
   Without Sid, mutable replay it would still be fiction.
 * My PhD mentor [Oren Laadan](http://www.cs.columbia.edu/~orenl/) heavily brainstormed with me during
   the implementation of the first scribe prototype. He had all the good ideas.
-* My advisor [Jason Nieh](http://nieh.net/) asked the right questions at the
+* My PhD advisor [Jason Nieh](http://nieh.net/) asked the right questions at the
   right moment, and pushed me really hard to make it happen.
 
 Thank you.
