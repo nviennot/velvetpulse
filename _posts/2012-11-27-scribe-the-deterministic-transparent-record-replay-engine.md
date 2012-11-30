@@ -7,16 +7,17 @@ tags: []
 ---
 {% include JB/setup %}
 
-### Table of Content
 
-* [What is Deterministic Record/Replay](#what_is_deterministic_recordreplay)
-* [What is Scribe](#what_is_scribe)
-* [Watch Scribe in Action](#watch_scribe_in_action)
-* [Scribe is Extensible](#scribe_is_extensible)
-* [Scribe is Work-in-Progress](#scribe_is_workinprogress)
-* [Scribe is Open-source](#scribe_is_opensource)
-* [Scribe Publications](#scribe_publications)
-* [Acknowledgments](#acknowledgments)
+### <span>Table of Content</span>
+
+» [What is Deterministic Record/Replay](#what_is_deterministic_recordreplay)  
+» [What is Scribe](#what_is_scribe)  
+» [Watch Scribe in Action](#watch_scribe_in_action)  
+» [Scribe is Extensible](#scribe_is_extensible)  
+» [Scribe is Work-in-Progress](#scribe_is_workinprogress)  
+» [Scribe is Open-source](#scribe_is_opensource)  
+» [Scribe Publications](#scribe_publications)  
+» [Acknowledgments](#acknowledgments)  
 
 What is Deterministic Record/Replay
 -----------------------------------
@@ -45,7 +46,7 @@ record and replay of generic applications on Linux.
 * **Robust**: tested on a wide variety of applications, such as Apache, MySQL, Nginx, MPlayer, [and more](#scribe_publications).
 * **Extensible**: python API to control record and replay behavior and to explore execution recordings.
 
-**TL;DR** Scribe is like a time machine for application executions.  It's an engine to bend the time-space continuum.
+**TL;DR** Scribe is a time machine for applications -- some wizardry to bend the time-space continuum.
 
 Watch Scribe in Action
 ----------------------
@@ -66,7 +67,7 @@ the same application from the log file. It has APIs to inspect the log files,
 to modify the logged execution, to control the recording and replaying and
 fiddle with its state.
 
-### But there is more to Scribe ...
+### <span>But there is more to Scribe ...</span>
 
 * Scribe can do tandem-like application execution, where the recording on one
 host is streamed to a second host and replayed in real time.
@@ -118,7 +119,7 @@ This is how I envision the roadmap:
   has with its external environment, you don't want to record separately
   the database and the application.
 
-### "I have a Dream"
+### <span>“I have a Dream”</span>
 
 With these three componants in place, I can fullfil a dream: being a web developer, I'd
 like to have an entire web stack recorded. When a user clicks on the "Feedback" button, I would replay the whole 
@@ -132,7 +133,7 @@ make it a reality. I will expand on this idea in another blog post.
 Scribe is Open-source
 ---------------------
 
-### Git Repositories
+### <span>Git Repositories</span>
 
 * [The Kernel](https://github.com/nviennot/nviennot/linux-2.6-scribe)
 * [The Userspace C Library](https://github.com/nviennot/nviennot/libscribe)
@@ -140,7 +141,7 @@ Scribe is Open-source
 
 Installation instructions are in the kernel repository.
 
-### Try it yourself
+### <span>Try it yourself</span>
 
 Download an Ubuntu 12.04 VM loaded with vanilla Scribe
 [here](http://velvetpulse.s3.amazonaws.com/vm/scribe-ubuntu-1204.tar.bz2) (1.1Gb).  

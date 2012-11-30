@@ -65,7 +65,7 @@ Let me share my workflow with you.
 Want it?
 --------
 
-### 1. Install irb-config
+### <span>1. Install irb-config</span>
 
     git clone git://github.com/nviennot/irb-config.git ~/.irb
     cd ~/.irb
@@ -76,7 +76,7 @@ You don't need to change any of your projects.
 When the `.irbrc` file is loaded, irb-config adds the global gemset to Bundler,
 and loads Pry.
 
-### 2. Setup some vim bindings
+### <span>2. Setup some vim bindings</span>
 
 a. You can use my [vim-config](https://github.com/nviennot/vim-config):
 
@@ -97,7 +97,7 @@ map <Leader>b :w<CR> :call ScreenShellSend("break ".@% . ':' . line('.'))<CR>
 {% endhighlight %}
 </div>
 
-### 3. Setup a proper tmux config (optional)
+### <span>3. Setup a proper tmux config (optional)</span>
 
     git clone git://github.com/nviennot/tmux-config.git ~/.tmux
     cd ~/.tmux
@@ -110,7 +110,7 @@ If you are using Windows, you deserve better.
 Notes
 -----
 
-### Starting in the dev environment
+### <span>Starting in the dev environment</span>
 
 When doing testing in the console with irb-config, always run `rails c`
 and let irb-config switch between your development environment and test
