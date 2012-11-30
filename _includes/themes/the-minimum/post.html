@@ -22,6 +22,14 @@
           <span class="year">{{ page.date | date: '%Y' }}</span>
           </date>
           </p>
+
+          {% if page.edited %}
+          <p class="date-publish">
+          Edited: {{ page.edited }}
+          </p>
+          {% endif %}
+
+
           <!--<ul class="list-category list-linear">-->
             <!--<li class="list-head">category: </li>-->
             <!--{% assign categories_list = page.categories %}-->

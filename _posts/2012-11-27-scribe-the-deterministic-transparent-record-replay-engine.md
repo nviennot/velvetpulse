@@ -4,6 +4,7 @@ title: "Scribe: The Deterministic Transparent Record/Replay Engine"
 description: ""
 category: 
 tags: []
+edited: November 30 2012
 ---
 {% include JB/setup %}
 
