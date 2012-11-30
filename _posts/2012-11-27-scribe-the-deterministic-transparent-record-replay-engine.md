@@ -7,24 +7,48 @@ tags: []
 ---
 {% include JB/setup %}
 
-What is Record/Replay
----------------------
+### Table of Content
 
-Deterministic application record and replay is the ability to record
-application execution and deterministically replay it at a later time.
-Record-replay has many potential uses, including diagnosing and debugging
-applications by capturing and reproducing hard to find bugs, dynamic
-application analysis by performing costly instrumentation on replicas that
-replay application behavior recorded on production systems, intrusion analysis
-by capturing intrusions involving non-deterministic effects, and
-fault-tolerance by providing replicas that replay execution and at the
-occurrence of a fault, go live in place of the previously running application
-instance.
+* [What is Deterministic Record/Replay](#what_is_deterministic_recordreplay)
+* [What is Scribe](#what_is_scribe)
+* [Watch Scribe in Action](#watch_scribe_in_action)
+* [Scribe is Extensible](#scribe_is_extensible)
+* [Scribe is Work-in-Progress](#scribe_is_workinprogress)
+* [Scribe is Open-source](#scribe_is_opensource)
+* [Scribe Publications](#scribe_publications)
+* [Acknowledgments](#acknowledgments)
 
-**TL;DR** Scribe is like a time machine for application executions.
+What is Deterministic Record/Replay
+-----------------------------------
 
-Scribe Demo
------------
+Deterministic application record and replay is the *ability to record
+application execution and deterministically replay it at a later time*.
+Record-replay has many potential uses:
+* Diagnosing and debugging applications by capturing and reproducing hard to find bugs.
+* Dynamic application analysis by performing costly instrumentation on replicas that
+replay application behavior recorded on production systems.
+* Intrusion analysis by capturing intrusions involving non-deterministic effects.
+* Fault-tolerance by providing replicas that replay execution and at the occurrence of
+a fault, go live in place of the previously running application instance.
+
+What is Scribe
+--------------
+
+Scribe is a record/replay engine to provide deterministic execution
+record and replay of generic applications on Linux.
+
+* **Deterministic**: replay produces the same outcome (filesystem, network, etc) recorded.
+* **Transparent**: no change, relink, or recompile applications/libraries, no specialized hardware.
+* **Multi-process/threaded**: record and replay of applications with multiple processes and threads.
+* **Go-Live**: replay of a recorded execution can transition to live execution at any point.
+* **Low runtime overhead**: efficient record and replay of both server and desktop applications.
+* **Robust**: tested on a wide variety of applications, such as Apache, MySQL, Nginx, MPlayer, [and more](#scribe_publications).
+* **Extensible**: python API to control record and replay behavior and to explore execution recordings.
+
+**TL;DR** Scribe is like a time machine for application executions.  It's an engine to bend the time-space continuum.
+
+Watch Scribe in Action
+----------------------
 
 <div class="screencast" markdown="1">
 <video class="video-js vjs-default-skin" controls="controls" poster="/assets/themes/the-minimum/img/screencast_poster_scribe.jpg"
@@ -34,72 +58,98 @@ Scribe Demo
 [download mp4](http://velvetpulse.s3.amazonaws.com/screencasts/scribe.mp4) (12:43 / 720p / 37Mb)
 </div>
 
-I Need Help
------------
+Scribe is Extensible
+--------------------
 
-Scribe is definitely not production ready. In fact it's not just unstable, it's
-also incomplete.  I need hackers to join the project, I cannot
-do it by myself: I've dedicated three years of my life on this project, and
-I've had enough of being the only one on the code, because I know that this
-is much bigger than me.
+Scribe records application execution into a log file, and can later replay
+the same application from the log file. It has APIs to inspect the log files,
+to modify the logged execution, to control the recording and replaying and
+fiddle with its state.
+
+### But there is more to Scribe ...
+
+* Scribe can do tandem-like application execution, where the recording on one
+host is streamed to a second host and replayed in real time.
+* Scribe can be used to record application execution, then modify the
+resulting log to force difference behavior when the application is replayed.
+For eaxmple, replay an multi-process applications with different scheduling to
+automatically expose and detect harmful race conditions
+([Racepro](#scribe_publications)).
+* Scribe can be used to record application exeuction, then replay a slight
+modified application while tolerating certain divergence from the expected
+execution indicated in the logs. For example, replay an application with
+debugging enabled from a recording without debugging output. ([mutable
+replay](#scribe_publications)).
+
+Indeed, in the video, I spend some time showing what we call *mutable replay*.
+It's a new concept that we've introduced and formalized. I will be presenting
+our research next March at the [ASPLOS 2013](http://asplos13.rice.edu/) conference.
+The mutable replay engine plugs into the Scribe engine through the Python
+library. The mutable replay sources are not yet distributed.
+
+
+Scribe is Work-in-Progress
+--------------------------
+
+Scribe is pretty robust, but not production ready. Some applications are not
+well supported. I am looking for hackers to join the project, as I cannot
+do it by myself: after having dedicated three years to this project, it has
+reached the complexity level that evidently demands additional brain power.
 
 [The code](https://github.com/nviennot/linux-2.6-scribe/tree/master/scribe)
-quality is fairly high, but it needs a lot of improvements.
+quality is fairly high, but there is room for improvements.
 
-This is how I see the roadmap:
+This is how I envision the roadmap:
 
-* **Stability**: Lots of application don't work. The ones that used to
-  work on the original prototype like Firefox and OpenOffice don't anymore for
-  obscure reasons that I cannot really explain. <rant>I've been chasing a futex
-  bug for a year.  Please someone find it so that I can find peace. Okay... I'm
-  being a bit dramatic.</rant>
+* **Coverage**: Some applications don't replay well. Some used to work on the 
+  original prototype, like Firefox and OpenOffice, but not anymore for obscure
+  reasons that need further exploration.
 
 * **Interpreters**: Scribe is transparent, meaning it requires no changes to
-  the applications. In some cases, it actually make sense to change the application.
-  For example, the internal of the Ruby/Python/Java VM don't need to be recorded.
-  I started to patch the Ruby interpreter to make it Scribe aware
-  (see [here](https://github.com/nviennot/rubyscribe)). Mutable replay works
-  much better when it has context.
+  the applications. In some cases, it actually does make sense to change the application.
+  For example, if the goal is to record and replay programs in languages like 
+  Ruby/Python/Java, we may get away without record an replay of the internals
+  of the respective VM. In fact, I started to patch the Ruby interpreter to make
+  it Scribe aware (see [here](https://github.com/nviennot/rubyscribe)). Mutable
+  replay works much better when it has context.
 
-* **Distributed**: I want to be able to record an application that spawns
-  on multiple servers. Because Scribe records all the interactions the application
+* **Distributed**: I want to be able to record an application that spans multiple
+  servers. Because Scribe records all the interactions the application
   has with its external environment, you don't want to record separately
   the database and the application.
 
-I am also a web developer. My dream is to have the entire stack recorded. When
-a user clicks on the "Feedback" button, I want to be able to replay the whole
-system on my development machine and see exactly what the user got, replaying
-her entire session. I want to replay it faithfully down to the race that
-may have happened in the database. I also want to be able to modify the code to
-understand it better while it's replaying. With enough brains on this, we can
-make it a reality.
+### "I have a Dream"
 
-Try it
--------
+With these three componants in place, I can fullfil a dream: being a web developer, I'd
+like to have an entire web stack recorded. When a user clicks on the "Feedback" button, I would replay the whole 
+system locally and observe exactly what the user got by replaying her entire session. With that, I'd like to replay it faithfully down to the race that
+may have happened in the database. I'd also like to be able to modify the code to
+understand it better *while it's replaying*. With enough brains on this, we can
+make it a reality. I will expand on this idea in another blog post.
 
-You can download an Ubuntu 12.04 VM loaded with vanilla Scribe
+<hr class="fancy" />
+
+Scribe is Open-source
+---------------------
+
+### Git Repositories
+
+* [The Kernel](https://github.com/nviennot/nviennot/linux-2.6-scribe)
+* [The Userspace C Library](https://github.com/nviennot/nviennot/libscribe)
+* [The Python Library](https://github.com/nviennot/nviennot/py-scribe)
+
+Installation instructions are in the kernel repository.
+
+### Try it yourself
+
+Download an Ubuntu 12.04 VM loaded with vanilla Scribe
 [here](http://velvetpulse.s3.amazonaws.com/vm/scribe-ubuntu-1204.tar.bz2) (1.1Gb).  
 You need [VMware Workstation](http://www.vmware.com/products/workstation/overview.html) or
 [VMware Player](http://www.vmware.com/products/player/overview.html) (free) to use it.  
 Login with root/root.
 
-You will need to update Scribe you are in because it's a bit out of date.
-
-Scribe is a Framework
----------------------
-
-In the video, I spend some time showing what we call *mutable replay*. It's a
-new concept that we've introduced and formalized. I will be presenting our
-research next March at the ASPLOS conference.
-
-The mutable replay engine plugs into the Scribe engine through the Python
-library. The mutable replay sources are not yet distributed.
-
-We have built other projects around the Scribe engine such as Racepro,
-a process race detection engine.
-
-Scribe gives you an API to record/replay applications, and fiddle with their
-state.
+Note: the VM does not contain the latest version Scribe, so you may want 
+to update the sources and recompile before you start to play with it.
 
 Scribe Publications
 -------------------
@@ -119,15 +169,6 @@ These papers are a must read for anybody who wants to understand more:
   Multiprocessor Operating Systems](http://viennot.biz/sigmetrics2010_scribe.pdf)  
   Oren Laadan, Nicolas Viennot, Jason Nieh,
   *Proceedings of ACM SIGMETRICS 2010 Conference on Measurement and Modeling of Computer Systems, New York, NY, June 2010*
-
-Sources
--------
-
-* [The Kernel](https://github.com/nviennot/nviennot/linux-2.6-scribe)
-* [The Userspace C Library](https://github.com/nviennot/nviennot/libscribe)
-* [The Python Library](https://github.com/nviennot/nviennot/py-scribe)
-
-Installation instructions are in the kernel repository.
 
 Acknowledgments
 ---------------
