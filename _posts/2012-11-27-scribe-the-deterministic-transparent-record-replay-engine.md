@@ -136,9 +136,9 @@ Scribe is Open-source
 
 ### <span>Git Repositories</span>
 
-* [The Kernel](https://github.com/nviennot/nviennot/linux-2.6-scribe)
-* [The Userspace C Library](https://github.com/nviennot/nviennot/libscribe)
-* [The Python Library](https://github.com/nviennot/nviennot/py-scribe)
+* [The Kernel](https://github.com/nviennot/linux-2.6-scribe)
+* [The Userspace C Library](https://github.com/nviennot/libscribe)
+* [The Python Library](https://github.com/nviennot/py-scribe)
 
 Installation instructions are in the kernel repository.
 
