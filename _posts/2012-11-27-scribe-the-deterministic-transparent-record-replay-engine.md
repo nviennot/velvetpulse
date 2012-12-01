@@ -175,7 +175,7 @@ These papers are a must read for anybody who wants to understand more:
 Acknowledgments
 ---------------
 
-* My friend [Sid Nair](http://sid-nair.com) implemented the mutable replay engine with me, he was great
+* My friend [Sid Nair](http://blog.sid-nair.com) implemented the mutable replay engine with me, he was great
   to work with.  
   Without Sid, mutable replay it would still be fiction.
 * My PhD mentor [Oren Laadan](http://www.cs.columbia.edu/~orenl/) heavily brainstormed with me during
