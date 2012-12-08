@@ -4,6 +4,7 @@ title: "Improve Your Ruby Workflow by Integrating vim/tmux/pry"
 description: ""
 category: 
 tags: []
+edited: December 08 2012
 ---
 {% include JB/setup %}
 
@@ -89,6 +90,11 @@ these bindings to your config:
 
 <div class="small">
 {% highlight vim %}
+" Screen settings
+let g:ScreenImpl = 'Tmux'
+let g:ScreenShellTmuxInitArgs = '-2'
+let g:ScreenShellInitialFocus = 'shell'
+let g:ScreenShellQuitOnVimExit = 0
 map <F5> :ScreenShellVertical<CR>
 command -nargs=? -complete=shellcmd W  :w | :call ScreenShellSend("load '".@%."';")
 map <Leader>r :w<CR> :call ScreenShellSend("rspec ".@% . ':' . line('.'))<CR>
