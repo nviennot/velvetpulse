@@ -112,7 +112,7 @@ This is how I envision the roadmap:
   For example, if the goal is to record and replay programs in languages like 
   Ruby/Python/Java, we may get away without record an replay of the internals
   of the respective VM. In fact, I started to patch the Ruby interpreter to make
-  it Scribe aware (see [here](https://github.com/nviennot/rubyscribe)). Mutable
+  it Scribe aware (see [here](https://github.com/nviennot/ruby-mri-scribe)). Mutable
   replay works much better when it has context.
 
 * **Distributed**: I want to be able to record an application that spans multiple
