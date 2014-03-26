@@ -4,7 +4,7 @@ title: "Scribe: The Deterministic Transparent Record/Replay Engine"
 description: ""
 category: 
 tags: []
-edited: November 30 2012
+edited: March 26 2014
 ---
 {% include JB/setup %}
 
@@ -74,34 +74,21 @@ fiddle with its state.
 host is streamed to a second host and replayed in real time.
 * Scribe can be used to record application execution, then modify the
 resulting log to force difference behavior when the application is replayed.
-For eaxmple, replay an multi-process applications with different scheduling to
+For example, replay an multi-process applications with different scheduling to
 automatically expose and detect harmful race conditions
 ([Racepro](#scribe_publications)).
-* Scribe can be used to record application exeuction, then replay a slight
-modified application while tolerating certain divergence from the expected
-execution indicated in the logs. For example, replay an application with
-debugging enabled from a recording without debugging output. ([mutable
-replay](#scribe_publications)).
-
-Indeed, in the video, I spend some time showing what we call *mutable replay*.
-It's a new concept that we've introduced and formalized. I will be presenting
-our research next March at the [ASPLOS 2013](http://asplos13.rice.edu/) conference.
+* Scribe can be used to record an application execution, and replay it
+after modifying the application, tolerating a divergent execution from the
+original one to some extent.  For example, replay an application with debugging
+enabled from a recording without debugging output. This is a new concept that
+we've introduced in the [mutable replay](#scribe_publications) paper.
 The mutable replay engine plugs into the Scribe engine through the Python
-library. The mutable replay sources are not yet distributed.
+library.
 
+Future Work
+------------
 
-Scribe is Work-in-Progress
---------------------------
-
-Scribe is pretty robust, but not production ready. Some applications are not
-well supported. I am looking for hackers to join the project, as I cannot
-do it by myself: after having dedicated three years to this project, it has
-reached the complexity level that evidently demands additional brain power.
-
-[The code](https://github.com/nviennot/linux-2.6-scribe/tree/master/scribe)
-quality is fairly high, but there is room for improvements.
-
-This is how I envision the roadmap:
+Here's what I'd focus on next:
 
 * **Coverage**: Some applications don't replay well. Some used to work on the 
   original prototype, like Firefox and OpenOffice, but not anymore for obscure
@@ -111,7 +98,7 @@ This is how I envision the roadmap:
   the applications. In some cases, it actually does make sense to change the application.
   For example, if the goal is to record and replay programs in languages like 
   Ruby/Python/Java, we may get away without record an replay of the internals
-  of the respective VM. In fact, I started to patch the Ruby interpreter to make
+  of the respective VM. I started to patch the Ruby interpreter to make
   it Scribe aware (see [here](https://github.com/nviennot/ruby-mri-scribe)). Mutable
   replay works much better when it has context.
 
@@ -122,25 +109,27 @@ This is how I envision the roadmap:
 
 ### <span>“I have a Dream”</span>
 
-With these three componants in place, I can fullfil a dream: being a web developer, I'd
+With these three components in place, I can fulfil a dream: being a web developer, I'd
 like to have an entire web stack recorded. When a user clicks on the "Feedback" button, I would replay the whole 
 system locally and observe exactly what the user got by replaying her entire session. With that, I'd like to replay it faithfully down to the race that
 may have happened in the database. I'd also like to be able to modify the code to
 understand it better *while it's replaying*. With enough brains on this, we can
-make it a reality. I will expand on this idea in another blog post.
+make it a reality.
 
 <hr class="fancy" />
 
-Scribe is Open-source
----------------------
+Scribe sources
+--------------
 
 ### <span>Git Repositories</span>
 
 * [The Kernel](https://github.com/nviennot/linux-2.6-scribe)
 * [The Userspace C Library](https://github.com/nviennot/libscribe)
 * [The Python Library](https://github.com/nviennot/py-scribe)
+* [The Mutable Replay Engine](https://github.com/columbia/mreplay)
 
-Installation instructions are in the kernel repository.
+Installation instructions are in the kernel repository. The mutable replay
+engine has no documentation (sorry), but you can try `mrecord` and `mreplay -h`.
 
 ### <span>Try it yourself</span>
 
@@ -156,12 +145,12 @@ to update the sources and recompile before you start to play with it.
 Scribe Publications
 -------------------
 
-These papers are a must read for anybody who wants to understand more:
+The implementation of Scribe resulted in three papers:
 
-* Transparent Mutable Replay for Multicore Debugging and Patch Validation  
+* [Transparent Mutable Replay for Multicore Debugging and Patch Validation](http://viennot.biz/asplos2013_dora.pdf)  
   Nicolas Viennot, Siddharth Nair, and Jason Nieh,
   *Eighteenth International Conference on Architectural Support for Programming Languages and Operating Systems (ASPLOS 2013),
-  Houston, Texas, March 2013*. To appear.
+  Houston, Texas, March 2013*
 
 * [Pervasive Detection of Process Races in Deployed Systems](http://viennot.biz/sosp2011_racepro.pdf)  
   Oren Laadan, Nicolas Viennot, Chia-Che Tsai, Chris Blinn, Junfeng Yang, and Jason Nieh,
@@ -175,7 +164,7 @@ These papers are a must read for anybody who wants to understand more:
 Acknowledgments
 ---------------
 
-* My friend [Sid Nair](http://blog.sid-nair.com) implemented the mutable replay engine with me, he was great
+* My friend [Sid Nair](http://sid-nair.com) implemented the mutable replay engine with me, he was great
   to work with.  
   Without Sid, mutable replay it would still be fiction.
 * My PhD mentor [Oren Laadan](http://www.cs.columbia.edu/~orenl/) heavily brainstormed with me during
