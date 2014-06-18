@@ -29,7 +29,9 @@ access to user data and resources on Amazon Web Services and Facebook.
 The Talk
 --------
 
-TODO: Add the video
+<iframe width="640" height="360" src="http://www.youtube.com/embed/xS0lyL_0OAM" frameborder="0" allowfullscreen="1"> </iframe>
+
+Slides are available [here](/assets/playdrone-slides.pdf).
 
 The Paper
 ---------
@@ -38,7 +40,13 @@ Our study appears in the
 [Sigmetrics'14](http://www.sigmetrics.org/sigmetrics2014/) conference and
 received the outstanding student paper award.
 
-You can download the paper [here](http://viennot.com/playdrone.pdf).
+You can download the paper [here](/assets/playdrone.pdf).
+
+Press Release
+-------------
+
+* [Columbia Engineering Stars at Sigmetrics 2014](http://engineering.columbia.edu/columbia-engineering-stars-sigmetrics-2014)
+* [Columbia Engineering Team Finds Thousands of Secret Keys in Android Apps](http://engineering.columbia.edu/columbia-engineering-team-finds-thousands-secret-keys-android-apps-0)
 
 The Sources
 -----------
