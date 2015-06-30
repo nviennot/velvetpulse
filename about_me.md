@@ -12,4 +12,4 @@ You can contact me at [nicolas@viennot.com](mailto:nicolas@viennot.com).
 I share my code at [github.com/nviennot](http://github.com/nviennot/).  
 My twitter is [@nviennot](https://twitter.com/nviennot).  
 
-For more information, you can take a look at [my outdated resume](http://viennot.biz/resume.pdf).
+For more information, you can take a look at [my resume](http://viennot.biz/resume.pdf).
